@@ -1,0 +1,379 @@
+import React, { useState } from 'react';
+import { 
+  Calendar, 
+  Clock, 
+  Video, 
+  Target, 
+  FileText, 
+  Youtube, 
+  BookOpen, 
+  Layout, 
+  Cpu, 
+  PenTool, 
+  Mail, 
+  Film,
+  CheckCircle,
+  Users,
+  Award,
+  ChevronRight
+} from 'lucide-react';
+
+const App = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    email: '',
+    courses: []
+  });
+
+  const [submitted, setSubmitted] = useState(false);
+
+  const curriculums = [
+    {
+      id: 1,
+      title: "정부과제 사업계획서",
+      description: "통과율을 높이는 핵심 전략과 AI 초안 작성법으로 제안서 전문가 등극",
+      icon: <FileText className="w-8 h-8 text-blue-400" />,
+      tag: "Business"
+    },
+    {
+      id: 2,
+      title: "유튜브 CF 동영상",
+      description: "AI 페르소나와 자동 편집 기술로 제작하는 고퀄리티 제품 홍보 영상",
+      icon: <Youtube className="w-8 h-8 text-blue-400" />,
+      tag: "Video"
+    },
+    {
+      id: 3,
+      title: "전자책 출간 (교보문고)",
+      description: "AI와 함께하는 5주 완성 집필 프로세스, 내 이름으로 당당히 작가 데뷔",
+      icon: <BookOpen className="w-8 h-8 text-blue-400" />,
+      tag: "Publishing"
+    },
+    {
+      id: 4,
+      title: "AI 랜딩페이지 구축",
+      description: "코딩 없이 1시간 만에 완성하는 고전환율 회사 홈페이지 제작 기술",
+      icon: <Layout className="w-8 h-8 text-blue-400" />,
+      tag: "Web"
+    },
+    {
+      id: 5,
+      title: "업무자동화 에이전트",
+      description: "단순 반복 업무는 이제 AI에게. 나만의 맞춤형 업무 비서(Agent) 구축",
+      icon: <Cpu className="w-8 h-8 text-blue-400" />,
+      tag: "Automation"
+    },
+    {
+      id: 6,
+      title: "Notebook LM 활용",
+      description: "수만 페이지의 문서를 학습시켜 1분 만에 제안서와 강의자료 뚝딱 만들기",
+      icon: <PenTool className="w-8 h-8 text-blue-400" />,
+      tag: "Smart Work"
+    },
+    {
+      id: 7,
+      title: "구글워크스페이스 정복",
+      description: "이메일부터 제미나이 연동까지, 생산성을 10배 높이는 협업 툴 마스터",
+      icon: <Mail className="w-8 h-8 text-blue-400" />,
+      tag: "Collaboration"
+    },
+    {
+      id: 8,
+      title: "통합 브랜드 영상",
+      description: "미드저니와 캔바를 결합한 압도적인 비주얼의 회사 홍보 콘텐츠 제작",
+      icon: <Film className="w-8 h-8 text-blue-400" />,
+      tag: "Branding"
+    }
+  ];
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleCheckboxChange = (courseTitle) => {
+    setFormData(prev => {
+      const isSelected = prev.courses.includes(courseTitle);
+      if (isSelected) {
+        return { ...prev, courses: prev.courses.filter(c => c !== courseTitle) };
+      } else {
+        return { ...prev, courses: [...prev.courses, courseTitle] };
+      }
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (formData.courses.length === 0) {
+      alert("하나 이상의 과정을 선택해주세요.");
+      return;
+    }
+    setSubmitted(true);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  return (
+    <div className="min-h-screen bg-[#0a0f1e] text-slate-200 font-sans selection:bg-blue-500 selection:text-white">
+      {/* Exclusivity Top Bar */}
+      <div className="bg-blue-600 py-2 text-center text-sm font-semibold tracking-wider text-white">
+        📢 AISH 중급 과정 수료 회원 전용 특별 혜택 과정
+      </div>
+
+      {/* Hero Section */}
+      <section className="relative pt-20 pb-32 px-4 overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-6xl opacity-20 pointer-events-none">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500 rounded-full blur-[120px]"></div>
+          <div className="absolute bottom-10 right-10 w-96 h-96 bg-indigo-600 rounded-full blur-[150px]"></div>
+        </div>
+
+        <div className="relative max-w-5xl mx-auto text-center">
+          <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-blue-900/40 border border-blue-500/30 text-blue-400 text-sm font-medium mb-8">
+            <Award className="w-4 h-4" />
+            <span>AI Skills Hub Special Training</span>
+          </div>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight leading-tight">
+            중급을 넘어 <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-300">전문가</span>로,<br />
+            커리어를 완성할 5주의 마법
+          </h1>
+          <p className="text-lg md:text-xl text-slate-400 mb-10 max-w-2xl mx-auto">
+            단순한 도구 활용을 넘어, 실전 비즈니스 결과물을 만들어내는<br className="hidden md:block" /> 
+            핵심 전문 강의로 당신을 Expert의 길로 인도합니다.
+          </p>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a href="#register" className="w-full sm:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-xl transition-all transform hover:scale-105 shadow-lg shadow-blue-900/20">
+              지금 바로 신청하기
+            </a>
+            <a href="#curriculum" className="w-full sm:w-auto px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded-xl transition-all border border-slate-700">
+              커리큘럼 상세보기
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Info Grid */}
+      <section className="max-w-6xl mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+          <div className="bg-[#151b2d] p-6 rounded-2xl border border-slate-800">
+            <div className="flex items-center space-x-3 mb-3 text-blue-400">
+              <Calendar className="w-5 h-5" />
+              <span className="font-bold">접수 기간</span>
+            </div>
+            <p className="text-xl font-semibold">2026.01.26 ~ 01.30</p>
+            <p className="text-sm text-red-400 mt-1">단 5일간 한정 모집!</p>
+          </div>
+          <div className="bg-[#151b2d] p-6 rounded-2xl border border-slate-800">
+            <div className="flex items-center space-x-3 mb-3 text-blue-400">
+              <Clock className="w-5 h-5" />
+              <span className="font-bold">교육 일정</span>
+            </div>
+            <p className="text-xl font-semibold">02.11 ~ 03.18</p>
+            <p className="text-sm text-slate-400 mt-1">매주 5주간 진행</p>
+          </div>
+          <div className="bg-[#151b2d] p-6 rounded-2xl border border-slate-800">
+            <div className="flex items-center space-x-3 mb-3 text-blue-400">
+              <Target className="w-5 h-5" />
+              <span className="font-bold">교육 시간</span>
+            </div>
+            <p className="text-xl font-semibold">저녁 9시 ~ 11시</p>
+            <p className="text-sm text-slate-400 mt-1">직장인 맞춤형 야간반</p>
+          </div>
+          <div className="bg-[#151b2d] p-6 rounded-2xl border border-slate-800">
+            <div className="flex items-center space-x-3 mb-3 text-blue-400">
+              <Video className="w-5 h-5" />
+              <span className="font-bold">교육 방법</span>
+            </div>
+            <p className="text-xl font-semibold">원격 실시간</p>
+            <p className="text-sm text-slate-400 mt-1">Zoom / 구글미트 실무실습</p>
+          </div>
+        </div>
+      </section>
+
+      {/* Exclusive Banner */}
+      <section className="py-20 bg-gradient-to-b from-[#0a0f1e] to-[#0f172a]">
+        <div className="max-w-4xl mx-auto px-4 text-center">
+          <div className="inline-block px-4 py-1 bg-indigo-900/50 text-indigo-300 rounded-lg text-xs font-bold mb-4 uppercase tracking-widest">AISH Member Benefit</div>
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Expert 훈련과정의 핵심 목표</h2>
+          <p className="text-slate-400 text-lg mb-12">
+            지식을 쌓는 것에서 그치지 않고, <span className="text-blue-400 font-bold">결과물(Output)</span>을 즉각적으로 만들어냅니다.<br />
+            5주 뒤, 당신은 더 이상 단순 사용자가 아닌 AI 기반 실무 전문가입니다.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+            <div className="flex flex-col items-center">
+              <div className="w-12 h-12 bg-blue-900/30 rounded-full flex items-center justify-center mb-4 border border-blue-500/20">
+                <CheckCircle className="text-blue-400" />
+              </div>
+              <h4 className="font-bold mb-2">실습 위주</h4>
+              <p className="text-sm text-slate-500 text-center leading-relaxed">이론은 짧게,<br />실행은 깊게 합니다.</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <div className="w-12 h-12 bg-blue-900/30 rounded-full flex items-center justify-center mb-4 border border-blue-500/20">
+                <Users className="w-6 h-6 text-blue-400" />
+              </div>
+              <h4 className="font-bold mb-2">밀착 관리</h4>
+              <p className="text-sm text-slate-500 text-center leading-relaxed">수업 중 즉각적인<br />질의응답과 코칭</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <div className="w-12 h-12 bg-blue-900/30 rounded-full flex items-center justify-center mb-4 border border-blue-500/20">
+                <Target className="w-6 h-6 text-blue-400" />
+              </div>
+              <h4 className="font-bold mb-2">확실한 성과</h4>
+              <p className="text-sm text-slate-500 text-center leading-relaxed">수료 후 결과물이<br />남는 진짜 교육</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Curriculum Section */}
+      <section id="curriculum" className="max-w-7xl mx-auto px-4 py-24">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4">8대 전문 교육 커리큘럼</h2>
+          <p className="text-slate-400">각 분야 최고의 효율을 낼 수 있는 Expert 특화 과정을 확인하세요.</p>
+        </div>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {curriculums.map((item) => (
+            <div key={item.id} className="group bg-[#151b2d] hover:bg-[#1a233b] p-8 rounded-3xl border border-slate-800 transition-all duration-300 hover:border-blue-500/50 hover:-translate-y-2 flex flex-col h-full shadow-lg">
+              <div className="mb-6 p-3 bg-blue-900/20 rounded-2xl w-fit group-hover:scale-110 transition-transform duration-300">
+                {item.icon}
+              </div>
+              <span className="text-[10px] uppercase tracking-widest text-blue-500 font-bold mb-2 block">{item.tag}</span>
+              <h3 className="text-xl font-bold mb-4 text-white">{item.title}</h3>
+              <p className="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">
+                {item.description}
+              </p>
+              <div className="flex items-center text-blue-400 text-xs font-bold tracking-tight">
+                자세히 보기 <ChevronRight className="w-4 h-4 ml-1" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* CTA Section / Registration Form */}
+      <section id="register" className="max-w-4xl mx-auto px-4 py-24">
+        <div className="bg-gradient-to-br from-blue-900/20 to-indigo-900/20 rounded-[3rem] p-8 md:p-16 border border-blue-500/20 shadow-2xl relative overflow-hidden">
+          <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-blue-500/10 rounded-full blur-[80px]"></div>
+          
+          {submitted ? (
+            <div className="text-center py-12">
+              <div className="inline-flex items-center justify-center w-20 h-20 bg-blue-600 rounded-full mb-6">
+                <CheckCircle className="w-10 h-10 text-white" />
+              </div>
+              <h2 className="text-3xl font-bold mb-4">참가 신청 완료!</h2>
+              <p className="text-slate-400 mb-8">성공적으로 접수되었습니다. 담당자가 곧 연락드리겠습니다.</p>
+              <button 
+                onClick={() => setSubmitted(false)}
+                className="text-blue-400 font-bold hover:underline"
+              >
+                새로 신청하기
+              </button>
+            </div>
+          ) : (
+            <>
+              <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">지금 바로 전문가 과정에 합류하세요!</h2>
+                <p className="text-slate-400">정원 마감 전, 서둘러 신청을 완료해 주세요.</p>
+              </div>
+
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-semibold mb-2 ml-1 text-slate-300">성명</label>
+                    <input 
+                      type="text" 
+                      name="name"
+                      required
+                      placeholder="이름을 입력하세요"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="w-full bg-[#0a0f1e] border border-slate-700 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold mb-2 ml-1 text-slate-300">연락처</label>
+                    <input 
+                      type="tel" 
+                      name="phone"
+                      required
+                      placeholder="010-0000-0000"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      className="w-full bg-[#0a0f1e] border border-slate-700 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
+                    />
+                  </div>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-semibold mb-2 ml-1 text-slate-300">이메일</label>
+                  <input 
+                    type="email" 
+                    name="email"
+                    required
+                    placeholder="example@email.com"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    className="w-full bg-[#0a0f1e] border border-slate-700 rounded-xl px-4 py-3 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold mb-3 ml-1 text-slate-300">수강 희망 과정 (중복 선택 가능)</label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    {curriculums.map(course => (
+                      <div 
+                        key={course.id}
+                        onClick={() => handleCheckboxChange(course.title)}
+                        className={`flex items-center space-x-3 p-3 rounded-xl border transition-all cursor-pointer ${
+                          formData.courses.includes(course.title) 
+                            ? 'bg-blue-600/20 border-blue-500 text-blue-400' 
+                            : 'bg-[#0a0f1e] border-slate-700 hover:border-slate-500'
+                        }`}
+                      >
+                        <div className={`w-5 h-5 rounded border flex items-center justify-center ${
+                          formData.courses.includes(course.title) ? 'bg-blue-500 border-blue-500' : 'border-slate-600'
+                        }`}>
+                          {formData.courses.includes(course.title) && <CheckCircle className="w-4 h-4 text-white" />}
+                        </div>
+                        <span className="text-sm font-medium">{course.title}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="pt-6">
+                  <button 
+                    type="submit"
+                    className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-2xl transition-all shadow-lg shadow-blue-900/40 text-lg"
+                  >
+                    참가 신청 제출하기
+                  </button>
+                </div>
+                <p className="text-center text-xs text-slate-500 mt-4">
+                  ※ 개인정보는 교육 안내 및 상담 목적으로만 활용됩니다.
+                </p>
+              </form>
+            </>
+          )}
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-[#050810] py-12 px-4 border-t border-slate-900">
+        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-8 md:space-y-0">
+          <div>
+            <div className="text-2xl font-bold tracking-tighter text-white mb-2">AISH <span className="text-blue-500">Skills Hub</span></div>
+            <p className="text-slate-500 text-sm">© 2026 AISH 교육협회. All rights reserved.</p>
+          </div>
+          <div className="flex space-x-8 text-sm text-slate-400">
+            <a href="#" className="hover:text-white">이용약관</a>
+            <a href="#" className="hover:text-white font-bold text-blue-400">개인정보처리방침</a>
+            <a href="#" className="hover:text-white">문의하기</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default App;
